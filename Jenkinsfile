@@ -6,5 +6,15 @@ node {
         stage('Test') {
             sh './jenkins/scripts/test.sh'
         }
+        stage('Deploy') {
+            // Create an Approval Button with a timeout of 15minutes.
+            timeout(time: 15, unit: "MINUTES") {
+                input message: 'Do you want to approve the deployment?', ok: 'Yes'
+            }
+
+            sh './jenkins/scripts/deliver.sh'
+            sleep(60)
+            sh './jenkins/scripts/kill.sh'
+        }
     }
 }
