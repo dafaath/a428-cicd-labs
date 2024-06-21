@@ -9,7 +9,7 @@ node {
         stage('Deploy') {
             // Create an Approval Button with a timeout of 15minutes.
             timeout(time: 15, unit: "MINUTES") {
-                input message: 'Do you want to approve the deployment?', ok: 'Yes'
+                input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed'
             }
 
             sh './jenkins/scripts/deliver.sh'
